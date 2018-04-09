@@ -69,6 +69,7 @@ class Service extends \Hprose\Service {
         return function($server, $socket, $fromid, $data)
                 use ($self, &$bytes, &$headerLength, &$dataLength, &$id) {
             $bytes .= $data;
+            $bytes = utf8_decode($bytes);
             while (true) {
                 $length = strlen($bytes);
                 if (($dataLength < 0) && ($length >= $headerLength)) {
